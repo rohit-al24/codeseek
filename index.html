@@ -68,6 +68,12 @@
             color: #ffcc00;
             margin-bottom: 20px;
         }
+        .win-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body onload="openFullscreen()">
@@ -76,58 +82,20 @@
     <p class="timer" id="countdown">20:00</p>
     <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
     
-    <div class="container" id="round1">
-        <h2>Round 1: Python Riddle</h2>
-        <p>What does this return in Python? <code>print(3 * '3')</code></p>
-        <input type="text" id="code1">
-        <button onclick="checkAnswer(1, '333')">Submit</button>
-        <button class="retry-button" id="retry1" onclick="retryRound(1)">Try Again</button>
-    </div>
-    
-    <div class="container hidden" id="round2">
-        <h2>Round 2: C Code Mystery</h2>
-        <p>What will this output? <code>printf("%d", 2 + 2 * 2);</code></p>
-        <input type="text" id="code2">
-        <button onclick="checkAnswer(2, '6')">Submit</button>
-        <button class="retry-button" id="retry2" onclick="retryRound(2)">Try Again</button>
-    </div>
-    
-    <div class="container hidden" id="round3">
-        <h2>Round 3: Logical Puzzle</h2>
-        <p>I am a programming concept that runs in a loop but stops when a condition is met. What am I?</p>
-        <input type="text" id="code3">
-        <button onclick="checkAnswer(3, 'while loop')">Submit</button>
-        <button class="retry-button" id="retry3" onclick="retryRound(3)">Try Again</button>
-    </div>
-    
-    <div class="container hidden" id="round4">
-        <h2>Round 4: Hackathon Challenge</h2>
-        <p>In Python, what is the output of <code>print(len("Hello" * 2))</code>?</p>
-        <input type="text" id="code4">
-        <button onclick="checkAnswer(4, '10')">Submit</button>
-        <button class="retry-button" id="retry4" onclick="retryRound(4)">Try Again</button>
-    </div>
-    
-    <div class="container hidden" id="round5">
-        <h2>Final Question: Kollywood Meets Python</h2>
-        <p>Vijay's movie title is "Thuppakki." If you store it in a variable and print the first three letters using Python, what do you get?</p>
-        <input type="text" id="code5">
-        <button onclick="checkAnswer(5, 'Thu')">Submit</button>
-        <button class="retry-button" id="retry5" onclick="retryRound(5)">Try Again</button>
-    </div>
-    
     <div class="container hidden" id="winScreen">
         <h2>🏆 Congratulations! You Won the CodeThon Adventure! 🎉</h2>
         <p>You have cracked all the puzzles and earned the title of Code Master!</p>
+        <img src="thankyou-placeholder.jpg" alt="Thank You" class="win-image">
     </div>
     
     <script>
         let lives = 5;
 
         function checkAnswer(round, correctAnswer) {
-            let userAnswer = document.getElementById(`code${round}`).value.trim();
+            let userAnswer = document.getElementById(`code${round}`).value.trim().toLowerCase();
+            let correctLower = correctAnswer.toLowerCase();
             let retryButton = document.getElementById(`retry${round}`);
-            if (userAnswer === correctAnswer) {
+            if (userAnswer === correctLower) {
                 document.getElementById(`round${round}`).classList.add('hidden');
                 if (round < 5) {
                     document.getElementById(`round${round + 1}`).classList.remove('hidden');
@@ -145,34 +113,6 @@
                 }
             }
         }
-
-        function retryRound(round) {
-            document.getElementById(`code${round}`).value = "";
-            document.getElementById(`retry${round}`).style.display = 'none';
-        }
-
-        function startTimer(duration) {
-            let timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                document.getElementById('countdown').textContent = minutes + ":" + seconds;
-                
-                if (--timer < 0) {
-                    alert("⏳ Time's up! The adventure ends here.");
-                    location.reload();
-                }
-            }, 1000);
-        }
-
-        window.onload = function () {
-            startTimer(20 * 60);
-            openFullscreen();
-        };
     </script>
 </body>
 </html>
