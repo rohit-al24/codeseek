@@ -57,6 +57,11 @@
         .hidden {
             display: none;
         }
+        .retry-button {
+            background: #ff4444;
+            color: white;
+            display: none;
+        }
         .branding {
             font-size: 18px;
             font-weight: bold;
@@ -76,6 +81,7 @@
         <p>What does this return in Python? <code>print(3 * '3')</code></p>
         <input type="text" id="code1">
         <button onclick="checkAnswer(1, '333')">Submit</button>
+        <button class="retry-button" id="retry1" onclick="retryRound(1)">Try Again</button>
     </div>
     
     <div class="container hidden" id="round2">
@@ -83,6 +89,7 @@
         <p>What will this output? <code>printf("%d", 2 + 2 * 2);</code></p>
         <input type="text" id="code2">
         <button onclick="checkAnswer(2, '6')">Submit</button>
+        <button class="retry-button" id="retry2" onclick="retryRound(2)">Try Again</button>
     </div>
     
     <div class="container hidden" id="round3">
@@ -90,6 +97,7 @@
         <p>I am a programming concept that runs in a loop but stops when a condition is met. What am I?</p>
         <input type="text" id="code3">
         <button onclick="checkAnswer(3, 'while loop')">Submit</button>
+        <button class="retry-button" id="retry3" onclick="retryRound(3)">Try Again</button>
     </div>
     
     <div class="container hidden" id="round4">
@@ -97,13 +105,15 @@
         <p>In Python, what is the output of <code>print(len("Hello" * 2))</code>?</p>
         <input type="text" id="code4">
         <button onclick="checkAnswer(4, '10')">Submit</button>
+        <button class="retry-button" id="retry4" onclick="retryRound(4)">Try Again</button>
     </div>
     
     <div class="container hidden" id="round5">
-        <h2>Final Round: The Treasure Hunt</h2>
-        <p>Solve the mystery! <br> "I'm an operator but not for math. I compare things, and if they're equal, I'm happy. What am I?"</p>
+        <h2>Final Question: Kollywood Meets Python</h2>
+        <p>Vijay's movie title is "Thuppakki." If you store it in a variable and print the first three letters using Python, what do you get?</p>
         <input type="text" id="code5">
-        <button onclick="checkAnswer(5, '==')">Submit</button>
+        <button onclick="checkAnswer(5, 'Thu')">Submit</button>
+        <button class="retry-button" id="retry5" onclick="retryRound(5)">Try Again</button>
     </div>
     
     <div class="container hidden" id="winScreen">
@@ -116,6 +126,7 @@
 
         function checkAnswer(round, correctAnswer) {
             let userAnswer = document.getElementById(`code${round}`).value.trim();
+            let retryButton = document.getElementById(`retry${round}`);
             if (userAnswer === correctAnswer) {
                 document.getElementById(`round${round}`).classList.add('hidden');
                 if (round < 5) {
@@ -126,12 +137,18 @@
             } else {
                 lives--;
                 document.getElementById("lives").textContent = lives;
+                retryButton.style.display = 'inline-block';
                 alert("❌ Wrong answer! Try again. Lives left: " + lives);
                 if (lives === 0) {
                     alert("💀 Game Over! You lost all your lives!");
                     location.reload();
                 }
             }
+        }
+
+        function retryRound(round) {
+            document.getElementById(`code${round}`).value = "";
+            document.getElementById(`retry${round}`).style.display = 'none';
         }
 
         function startTimer(duration) {
@@ -150,19 +167,6 @@
                     location.reload();
                 }
             }, 1000);
-        }
-
-        function openFullscreen() {
-            let elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.mozRequestFullScreen) {
-                elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) {
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
-            }
         }
 
         window.onload = function () {
