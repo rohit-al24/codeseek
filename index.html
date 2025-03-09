@@ -57,17 +57,6 @@
         .hidden {
             display: none;
         }
-        .retry-button {
-            background: #ff4444;
-            color: white;
-            display: none;
-        }
-        .branding {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffcc00;
-            margin-bottom: 20px;
-        }
         .win-image {
             width: 100%;
             max-width: 500px;
@@ -78,7 +67,6 @@
 </head>
 <body onload="openFullscreen(); startTimer(45 * 60)">
     <h1> CodeSeek Adventure - The 45-Min Challenge! 🏆</h1>
-    <p class="branding">Powered by Programming Club</p>
     <p class="timer" id="countdown">45:00</p>
     <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
     
@@ -90,19 +78,15 @@
     </div>
     
     <div class="container hidden" id="gameStage">
-        <h2>Mini Puzzle Challenge! 🧩</h2>
-        <p>Break the lock by solving: What’s 2 + 2 * 2?</p>
-        <input type="text" id="puzzleAnswer" placeholder="Your Answer">
-        <button onclick="checkPuzzle()">Submit</button>
-        <p id="puzzleFeedback"></p>
+        <h2>Crack the Lock! 🔐</h2>
+        <p>Use arrow keys to move the key into the lock.</p>
+        <canvas id="lockCanvas" width="400" height="200" style="background:#262626;"></canvas>
     </div>
     
     <div class="container hidden" id="finalGame">
-        <h2>Final Mystery Challenge 🔐</h2>
-        <p>Use the arrow keys to move the box and reveal the hidden code.</p>
-        <canvas id="gameCanvas" width="400" height="200" style="background:#262626;"></canvas>
-        <p>Find the code and type it here:</p>
-        <input type="text" id="finalAnswer" placeholder="Enter the code">
+        <h2>Final Challenge: Unscramble the Word 🔤</h2>
+        <p>Identify the movie from this scrambled name: HARSIMA</p>
+        <input type="text" id="finalAnswer" placeholder="Enter the word">
         <button onclick="checkFinalGame()">Submit</button>
     </div>
     
