@@ -76,7 +76,7 @@
         }
     </style>
 </head>
-<body onload="openFullscreen()">
+<body onload="openFullscreen(); startTimer(45 * 60)">
     <h1> CodeSeek Adventure - The 45-Min Challenge! 🏆</h1>
     <p class="branding">Powered by Programming Club</p>
     <p class="timer" id="countdown">45:00</p>
@@ -151,13 +151,17 @@
             }
         }
         
-        function checkPuzzle() {
-            if (document.getElementById("puzzleAnswer").value.trim() === "6") {
-                document.getElementById("gameStage").classList.add("hidden");
-                document.getElementById("finalGame").classList.remove("hidden");
-            } else {
-                alert("❌ Incorrect! Try Again.");
-            }
+        function startTimer(duration) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = Math.floor(timer / 60);
+                seconds = timer % 60;
+                document.getElementById("countdown").textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+                if (--timer < 0) {
+                    alert("⏳ Time’s up! Game Over!");
+                    location.reload();
+                }
+            }, 1000);
         }
         
         function openFullscreen() {
