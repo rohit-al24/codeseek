@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSeek Adventure</title>
+    <title>Programming Club - CodeThon Adventure</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -57,10 +57,17 @@
         .hidden {
             display: none;
         }
+        .branding {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-<body>
-    <h1>🚀 CodeThon Adventure - The 20-Min Challenge! 🏆</h1>
+<body onload="openFullscreen()">
+    <h1>🚀 Programming Club Presents: CodeThon Adventure - The 20-Min Challenge! 🏆</h1>
+    <p class="branding">Powered by Programming Club</p>
     <p class="timer" id="countdown">20:00</p>
     <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
     
@@ -145,8 +152,22 @@
             }, 1000);
         }
 
+        function openFullscreen() {
+            let elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+
         window.onload = function () {
             startTimer(20 * 60);
+            openFullscreen();
         };
     </script>
 </body>
