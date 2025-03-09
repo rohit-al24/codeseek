@@ -3,45 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon Fun Rounds</title>
+    <title>CodeThon Challenge</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Courier New', monospace;
+            background-color: #0d0d0d;
+            color: #00ffcc;
             text-align: center;
             margin: 20px;
         }
         .container {
-            max-width: 600px;
-            background: white;
+            max-width: 800px;
+            background: #1a1a1a;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px #00ffcc;
             margin: auto;
         }
         h2 {
-            color: #333;
+            color: #00ffcc;
         }
         .timer {
-            font-size: 20px;
-            color: red;
+            font-size: 24px;
+            color: #ff4444;
+            font-weight: bold;
         }
-        textarea {
+        textarea, input {
             width: 100%;
-            height: 100px;
+            padding: 10px;
+            background: #262626;
+            color: #00ffcc;
+            border: 1px solid #00ffcc;
+            border-radius: 5px;
             margin-top: 10px;
         }
         button {
-            background: #007BFF;
-            color: white;
+            background: #00ffcc;
+            color: #0d0d0d;
             padding: 10px 15px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             margin-top: 10px;
+            font-weight: bold;
         }
         button:hover {
-            background: #0056b3;
+            background: #00997a;
         }
         .hidden {
             display: none;
@@ -49,58 +56,85 @@
     </style>
 </head>
 <body>
+    <h1>🔥 CodeThon - 45 Min Challenge 🔥</h1>
+    <p class="timer" id="countdown">45:00</p>
+    
     <div class="container" id="round1">
-        <h2>Round 1: Puzzle Challenge</h2>
-        <p><strong>Puzzle:</strong> I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?</p>
-        <input type="text" id="puzzleAnswer" placeholder="Enter your answer here">
+        <h2>Round 1: Basic Coding</h2>
+        <p><strong>Problem:</strong> Write a function to check if a number is prime.</p>
+        <textarea id="code1"></textarea>
         <br>
-        <button onclick="checkPuzzle()">Submit</button>
+        <button onclick="nextRound('round1', 'round2')">Submit</button>
     </div>
     
     <div class="container hidden" id="round2">
-        <h2>Round 2: Problem Solving</h2>
-        <p><strong>Problem:</strong> Given a number N, print "Even" if N is even, otherwise print "Odd".</p>
-        <textarea id="codeSolution" placeholder="Write your solution here..."></textarea>
+        <h2>Round 2: Logic Challenge</h2>
+        <p><strong>Problem:</strong> Implement a Fibonacci sequence generator.</p>
+        <textarea id="code2"></textarea>
         <br>
         <button onclick="nextRound('round2', 'round3')">Submit</button>
     </div>
     
     <div class="container hidden" id="round3">
-        <h2>Final Round: Treasure Hunt</h2>
-        <p>Find the hidden key! Solve this riddle: "I have cities but no houses, forests but no trees, and rivers but no water. What am I?"</p>
-        <input type="text" id="treasureAnswer" placeholder="Enter your answer here">
+        <h2>Round 3: Code Debugging</h2>
+        <p>Fix the error in the following code:</p>
+        <pre>
+            def multiply(a, b):
+                return a * b
+            print(multiply(5))  # Fix this error
+        </pre>
+        <textarea id="code3"></textarea>
         <br>
-        <button onclick="checkTreasure()">Submit</button>
+        <button onclick="nextRound('round3', 'round4')">Submit</button>
+    </div>
+    
+    <div class="container hidden" id="round4">
+        <h2>Round 4: Hackathon Problem</h2>
+        <p><strong>Problem:</strong> Write a function that sorts an array without using built-in sorting functions.</p>
+        <textarea id="code4"></textarea>
+        <br>
+        <button onclick="nextRound('round4', 'round5')">Submit</button>
+    </div>
+    
+    <div class="container hidden" id="round5">
+        <h2>Final Round: Algorithmic Problem</h2>
+        <p><strong>Problem:</strong> Implement an efficient algorithm to solve the "Shortest Path" problem.</p>
+        <textarea id="code5"></textarea>
+        <br>
+        <button onclick="nextRound('round5', 'winScreen')">Submit</button>
     </div>
     
     <div class="container hidden" id="winScreen">
-        <h2>🎉 Congratulations! You Won! 🎉</h2>
-        <p>You have successfully completed all rounds of the hackathon fun challenge!</p>
+        <h2>🎉 Congratulations! You Won CodeThon! 🎉</h2>
+        <p>You have successfully completed all five rounds of the challenge!</p>
     </div>
     
     <script>
-        function checkPuzzle() {
-            let answer = document.getElementById('puzzleAnswer').value.toLowerCase();
-            if (answer === "echo") {
-                nextRound('round1', 'round2');
-            } else {
-                alert("Wrong answer! Try again.");
-            }
-        }
-
-        function checkTreasure() {
-            let answer = document.getElementById('treasureAnswer').value.toLowerCase();
-            if (answer === "map") {
-                nextRound('round3', 'winScreen');
-            } else {
-                alert("Wrong answer! Try again.");
-            }
-        }
-        
         function nextRound(current, next) {
             document.getElementById(current).classList.add('hidden');
             document.getElementById(next).classList.remove('hidden');
         }
+
+        function startTimer(duration) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                document.getElementById('countdown').textContent = minutes + ":" + seconds;
+                
+                if (--timer < 0) {
+                    alert("Time's up! The event is over.");
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            startTimer(45 * 60);
+        };
     </script>
 </body>
 </html>
