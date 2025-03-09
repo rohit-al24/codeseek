@@ -64,7 +64,7 @@
         <p><strong>Problem:</strong> Write a function to check if a number is prime.</p>
         <textarea id="code1"></textarea>
         <br>
-        <button onclick="nextRound('round1', 'round2')">Submit</button>
+        <button onclick="checkAnswer(1, 'def is_prime(n):')">Submit</button>
     </div>
     
     <div class="container hidden" id="round2">
@@ -72,7 +72,7 @@
         <p><strong>Problem:</strong> Implement a Fibonacci sequence generator.</p>
         <textarea id="code2"></textarea>
         <br>
-        <button onclick="nextRound('round2', 'round3')">Submit</button>
+        <button onclick="checkAnswer(2, 'def fibonacci(n):')">Submit</button>
     </div>
     
     <div class="container hidden" id="round3">
@@ -85,7 +85,7 @@
         </pre>
         <textarea id="code3"></textarea>
         <br>
-        <button onclick="nextRound('round3', 'round4')">Submit</button>
+        <button onclick="checkAnswer(3, 'print(multiply(5, 3))')">Submit</button>
     </div>
     
     <div class="container hidden" id="round4">
@@ -93,7 +93,7 @@
         <p><strong>Problem:</strong> Write a function that sorts an array without using built-in sorting functions.</p>
         <textarea id="code4"></textarea>
         <br>
-        <button onclick="nextRound('round4', 'round5')">Submit</button>
+        <button onclick="checkAnswer(4, 'def custom_sort(arr):')">Submit</button>
     </div>
     
     <div class="container hidden" id="round5">
@@ -101,7 +101,7 @@
         <p><strong>Problem:</strong> Implement an efficient algorithm to solve the "Shortest Path" problem.</p>
         <textarea id="code5"></textarea>
         <br>
-        <button onclick="nextRound('round5', 'winScreen')">Submit</button>
+        <button onclick="checkAnswer(5, 'def shortest_path(graph, start):')">Submit</button>
     </div>
     
     <div class="container hidden" id="winScreen">
@@ -110,9 +110,18 @@
     </div>
     
     <script>
-        function nextRound(current, next) {
-            document.getElementById(current).classList.add('hidden');
-            document.getElementById(next).classList.remove('hidden');
+        function checkAnswer(round, correctSnippet) {
+            let userCode = document.getElementById(`code${round}`).value;
+            if (userCode.includes(correctSnippet)) {
+                document.getElementById(`round${round}`).classList.add('hidden');
+                if (round < 5) {
+                    document.getElementById(`round${round + 1}`).classList.remove('hidden');
+                } else {
+                    document.getElementById('winScreen').classList.remove('hidden');
+                }
+            } else {
+                alert("Incorrect answer! Try again.");
+            }
         }
 
         function startTimer(duration) {
