@@ -99,11 +99,16 @@
         let lives = 5;
         let currentQuestion = 0;
         const questions = [
-            { q: "What is the output of print(2**3)?", a: "8" },
-            { q: "Which keyword is used to define a function in Python?", a: "def" },
-            { q: "What is the result of 5+5 in C?", a: "10" },
-            { q: "What is the capital of Tamil Nadu?", a: "Chennai" },
-            { q: "Identify the Thalapathy Vijay movie from this scrambled name: HIREAG", a: "GHAJINI" }
+            { q: "What will be the output of print(7 // 2)?", a: "3" },
+            { q: "What is the output of len(set([1,2,2,3,4,4,5]))?", a: "5" },
+            { q: "What will be the output of print(bool('False'))?", a: "True" },
+            { q: "What is the output of print(3 * '3')?", a: "333" },
+            { q: "What does print(2**3**2) output?", a: "512" },
+            { q: "What will be the output of print('hello'.capitalize())?", a: "Hello" },
+            { q: "What will print('Python'[1:4]) output?", a: "yth" },
+            { q: "Which function converts a string into an integer in Python?", a: "int" },
+            { q: "Which Python function is used to get user input?", a: "input" },
+            { q: "Identify the movie from this scrambled name: HARSIMA", a: "Mersal" }
         ];
         
         function loadQuestion() {
@@ -118,7 +123,7 @@
         function checkAnswer() {
             let userAnswer = document.getElementById("answer").value.trim().toLowerCase();
             let correctAnswer = questions[currentQuestion].a.toLowerCase();
-            if (userAnswer === correctAnswer) {
+            if (userAnswer.replace(/\s+/g, '') === correctAnswer.replace(/\s+/g, '')) {
                 currentQuestion++;
                 loadQuestion();
             } else {
