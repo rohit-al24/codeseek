@@ -91,10 +91,19 @@
     
     <div class="container hidden" id="gameStage">
         <h2>Mini Puzzle Challenge! 🧩</h2>
-        <p>Rearrange the letters to form a valid Python keyword: <strong>injo</strong></p>
+        <p>Break the lock by solving: What’s 2 + 2 * 2?</p>
         <input type="text" id="puzzleAnswer" placeholder="Your Answer">
         <button onclick="checkPuzzle()">Submit</button>
         <p id="puzzleFeedback"></p>
+    </div>
+    
+    <div class="container hidden" id="finalGame">
+        <h2>Final Mystery Challenge 🔐</h2>
+        <p>Use the arrow keys to move the box and reveal the hidden code.</p>
+        <canvas id="gameCanvas" width="400" height="200" style="background:#262626;"></canvas>
+        <p>Find the code and type it here:</p>
+        <input type="text" id="finalAnswer" placeholder="Enter the code">
+        <button onclick="checkFinalGame()">Submit</button>
     </div>
     
     <div class="container hidden" id="winScreen">
@@ -106,7 +115,6 @@
     <script>
         let lives = 5;
         let currentQuestion = 0;
-        let gameStageUnlocked = false;
         const questions = [
             { q: "What will be the output of print(3 * '3')?", a: "333" },
             { q: "I hold values, can change anytime, Give me a name, and I’ll be fine! What am I?", a: "variable" },
@@ -119,11 +127,10 @@
         function loadQuestion() {
             if (currentQuestion < questions.length) {
                 document.getElementById("question").textContent = questions[currentQuestion].q;
-                document.getElementById("answer").value = ""; // Clear input field
+                document.getElementById("answer").value = "";
             } else {
                 document.getElementById("gameArea").classList.add("hidden");
                 document.getElementById("gameStage").classList.remove("hidden");
-                gameStageUnlocked = true;
             }
         }
         
@@ -145,10 +152,9 @@
         }
         
         function checkPuzzle() {
-            let userAnswer = document.getElementById("puzzleAnswer").value.trim().toLowerCase();
-            if (userAnswer === "join") {
+            if (document.getElementById("puzzleAnswer").value.trim() === "6") {
                 document.getElementById("gameStage").classList.add("hidden");
-                document.getElementById("winScreen").classList.remove("hidden");
+                document.getElementById("finalGame").classList.remove("hidden");
             } else {
                 alert("❌ Incorrect! Try Again.");
             }
