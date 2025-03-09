@@ -60,48 +60,63 @@
     <p class="timer" id="countdown">45:00</p>
     
     <div class="container" id="round1">
-        <h2>Round 1: Basic Coding</h2>
-        <p><strong>Problem:</strong> Write a function to check if a number is prime.</p>
-        <textarea id="code1"></textarea>
+        <h2>Round 1: Python Puzzle</h2>
+        <p><strong>Problem:</strong> What will be the output of the following code?</p>
+        <pre>
+            x = [1, 2, 3]
+            print(x * 3)
+        </pre>
+        <input type="text" id="code1">
         <br>
-        <button onclick="checkAnswer(1, 'def is_prime(n):')">Submit</button>
+        <button onclick="checkAnswer(1, '[1, 2, 3, 1, 2, 3, 1, 2, 3]')">Submit</button>
     </div>
     
     <div class="container hidden" id="round2">
-        <h2>Round 2: Logic Challenge</h2>
-        <p><strong>Problem:</strong> Implement a Fibonacci sequence generator.</p>
-        <textarea id="code2"></textarea>
+        <h2>Round 2: C Code Debugging</h2>
+        <p><strong>Problem:</strong> Find the error in the following C code:</p>
+        <pre>
+            #include <stdio.h>
+            int main() {
+                int a = 5;
+                printf("%d", a+ ); // Fix the error
+                return 0;
+            }
+        </pre>
+        <input type="text" id="code2">
         <br>
-        <button onclick="checkAnswer(2, 'def fibonacci(n):')">Submit</button>
+        <button onclick="checkAnswer(2, 'a +')">Submit</button>
     </div>
     
     <div class="container hidden" id="round3">
-        <h2>Round 3: Code Debugging</h2>
-        <p>Fix the error in the following code:</p>
-        <pre>
-            def multiply(a, b):
-                return a * b
-            print(multiply(5))  # Fix this error
-        </pre>
+        <h2>Round 3: Algorithmic Challenge</h2>
+        <p><strong>Problem:</strong> Implement a function in Python to reverse a string without using built-in functions.</p>
         <textarea id="code3"></textarea>
         <br>
-        <button onclick="checkAnswer(3, 'print(multiply(5, 3))')">Submit</button>
+        <button onclick="checkAnswer(3, 'def reverse_string(s):')">Submit</button>
     </div>
     
     <div class="container hidden" id="round4">
-        <h2>Round 4: Hackathon Problem</h2>
-        <p><strong>Problem:</strong> Write a function that sorts an array without using built-in sorting functions.</p>
-        <textarea id="code4"></textarea>
+        <h2>Round 4: C Programming Logic</h2>
+        <p><strong>Problem:</strong> What will be the output of this C code?</p>
+        <pre>
+            #include <stdio.h>
+            int main() {
+                int x = 3;
+                printf("%d", x++ * ++x);
+                return 0;
+            }
+        </pre>
+        <input type="text" id="code4">
         <br>
-        <button onclick="checkAnswer(4, 'def custom_sort(arr):')">Submit</button>
+        <button onclick="checkAnswer(4, '12')">Submit</button>
     </div>
     
     <div class="container hidden" id="round5">
-        <h2>Final Round: Algorithmic Problem</h2>
-        <p><strong>Problem:</strong> Implement an efficient algorithm to solve the "Shortest Path" problem.</p>
+        <h2>Final Round: Hackathon Problem</h2>
+        <p><strong>Problem:</strong> Write an efficient algorithm to find the second largest number in an unsorted array.</p>
         <textarea id="code5"></textarea>
         <br>
-        <button onclick="checkAnswer(5, 'def shortest_path(graph, start):')">Submit</button>
+        <button onclick="checkAnswer(5, 'def second_largest(arr):')">Submit</button>
     </div>
     
     <div class="container hidden" id="winScreen">
