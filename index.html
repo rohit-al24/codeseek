@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeThon Challenge</title>
+    <title>CodeSeek Adventure</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -28,8 +28,12 @@
             color: #ff4444;
             font-weight: bold;
         }
-        textarea, input {
-            width: 100%;
+        .lives {
+            font-size: 20px;
+            color: #ffcc00;
+        }
+        input {
+            width: 80%;
             padding: 10px;
             background: #262626;
             color: #00ffcc;
@@ -56,78 +60,56 @@
     </style>
 </head>
 <body>
-    <h1>🔥 CodeThon - 45 Min Challenge 🔥</h1>
-    <p class="timer" id="countdown">45:00</p>
+    <h1>🚀 CodeThon Adventure - The 20-Min Challenge! 🏆</h1>
+    <p class="timer" id="countdown">20:00</p>
+    <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
     
     <div class="container" id="round1">
-        <h2>Round 1: Python Puzzle</h2>
-        <p><strong>Problem:</strong> What will be the output of the following code?</p>
-        <pre>
-            x = [1, 2, 3]
-            print(x * 3)
-        </pre>
+        <h2>Round 1: Python Riddle</h2>
+        <p>What does this return in Python? <code>print(3 * '3')</code></p>
         <input type="text" id="code1">
-        <br>
-        <button onclick="checkAnswer(1, '[1, 2, 3, 1, 2, 3, 1, 2, 3]')">Submit</button>
+        <button onclick="checkAnswer(1, '333')">Submit</button>
     </div>
     
     <div class="container hidden" id="round2">
-        <h2>Round 2: C Code Debugging</h2>
-        <p><strong>Problem:</strong> Find the error in the following C code:</p>
-        <pre>
-            #include <stdio.h>
-            int main() {
-                int a = 5;
-                printf("%d", a+ ); // Fix the error
-                return 0;
-            }
-        </pre>
+        <h2>Round 2: C Code Mystery</h2>
+        <p>What will this output? <code>printf("%d", 2 + 2 * 2);</code></p>
         <input type="text" id="code2">
-        <br>
-        <button onclick="checkAnswer(2, 'a +')">Submit</button>
+        <button onclick="checkAnswer(2, '6')">Submit</button>
     </div>
     
     <div class="container hidden" id="round3">
-        <h2>Round 3: Algorithmic Challenge</h2>
-        <p><strong>Problem:</strong> Implement a function in Python to reverse a string without using built-in functions.</p>
-        <textarea id="code3"></textarea>
-        <br>
-        <button onclick="checkAnswer(3, 'def reverse_string(s):')">Submit</button>
+        <h2>Round 3: Logical Puzzle</h2>
+        <p>I am a programming concept that runs in a loop but stops when a condition is met. What am I?</p>
+        <input type="text" id="code3">
+        <button onclick="checkAnswer(3, 'while loop')">Submit</button>
     </div>
     
     <div class="container hidden" id="round4">
-        <h2>Round 4: C Programming Logic</h2>
-        <p><strong>Problem:</strong> What will be the output of this C code?</p>
-        <pre>
-            #include <stdio.h>
-            int main() {
-                int x = 3;
-                printf("%d", x++ * ++x);
-                return 0;
-            }
-        </pre>
+        <h2>Round 4: Hackathon Challenge</h2>
+        <p>In Python, what is the output of <code>print(len("Hello" * 2))</code>?</p>
         <input type="text" id="code4">
-        <br>
-        <button onclick="checkAnswer(4, '12')">Submit</button>
+        <button onclick="checkAnswer(4, '10')">Submit</button>
     </div>
     
     <div class="container hidden" id="round5">
-        <h2>Final Round: Hackathon Problem</h2>
-        <p><strong>Problem:</strong> Write an efficient algorithm to find the second largest number in an unsorted array.</p>
-        <textarea id="code5"></textarea>
-        <br>
-        <button onclick="checkAnswer(5, 'def second_largest(arr):')">Submit</button>
+        <h2>Final Round: The Treasure Hunt</h2>
+        <p>Solve the mystery! <br> "I'm an operator but not for math. I compare things, and if they're equal, I'm happy. What am I?"</p>
+        <input type="text" id="code5">
+        <button onclick="checkAnswer(5, '==')">Submit</button>
     </div>
     
     <div class="container hidden" id="winScreen">
-        <h2>🎉 Congratulations! You Won CodeThon! 🎉</h2>
-        <p>You have successfully completed all five rounds of the challenge!</p>
+        <h2>🏆 Congratulations! You Won the CodeThon Adventure! 🎉</h2>
+        <p>You have cracked all the puzzles and earned the title of Code Master!</p>
     </div>
     
     <script>
-        function checkAnswer(round, correctSnippet) {
-            let userCode = document.getElementById(`code${round}`).value;
-            if (userCode.includes(correctSnippet)) {
+        let lives = 5;
+
+        function checkAnswer(round, correctAnswer) {
+            let userAnswer = document.getElementById(`code${round}`).value.trim();
+            if (userAnswer === correctAnswer) {
                 document.getElementById(`round${round}`).classList.add('hidden');
                 if (round < 5) {
                     document.getElementById(`round${round + 1}`).classList.remove('hidden');
@@ -135,7 +117,13 @@
                     document.getElementById('winScreen').classList.remove('hidden');
                 }
             } else {
-                alert("Incorrect answer! Try again.");
+                lives--;
+                document.getElementById("lives").textContent = lives;
+                alert("❌ Wrong answer! Try again. Lives left: " + lives);
+                if (lives === 0) {
+                    alert("💀 Game Over! You lost all your lives!");
+                    location.reload();
+                }
             }
         }
 
@@ -151,13 +139,14 @@
                 document.getElementById('countdown').textContent = minutes + ":" + seconds;
                 
                 if (--timer < 0) {
-                    alert("Time's up! The event is over.");
+                    alert("⏳ Time's up! The adventure ends here.");
+                    location.reload();
                 }
             }, 1000);
         }
 
         window.onload = function () {
-            startTimer(45 * 60);
+            startTimer(20 * 60);
         };
     </script>
 </body>
