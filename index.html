@@ -82,6 +82,13 @@
     <p class="timer" id="countdown">20:00</p>
     <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
     
+    <div class="container" id="gameArea">
+        <h2 id="question">Loading Question...</h2>
+        <input type="text" id="answer" placeholder="Enter your answer here">
+        <button onclick="checkAnswer()">Submit</button>
+        <p id="feedback"></p>
+    </div>
+    
     <div class="container hidden" id="winScreen">
         <h2>🏆 Congratulations! You Won the CodeThon Adventure! 🎉</h2>
         <p>You have cracked all the puzzles and earned the title of Code Master!</p>
@@ -90,29 +97,54 @@
     
     <script>
         let lives = 5;
-
-        function checkAnswer(round, correctAnswer) {
-            let userAnswer = document.getElementById(`code${round}`).value.trim().toLowerCase();
-            let correctLower = correctAnswer.toLowerCase();
-            let retryButton = document.getElementById(`retry${round}`);
-            if (userAnswer === correctLower) {
-                document.getElementById(`round${round}`).classList.add('hidden');
-                if (round < 5) {
-                    document.getElementById(`round${round + 1}`).classList.remove('hidden');
-                } else {
-                    document.getElementById('winScreen').classList.remove('hidden');
-                }
+        let currentQuestion = 0;
+        const questions = [
+            { q: "What is the output of print(2**3)?", a: "8" },
+            { q: "Which keyword is used to define a function in Python?", a: "def" },
+            { q: "What is the result of 5+5 in C?", a: "10" },
+            { q: "What is the capital of Tamil Nadu?", a: "Chennai" },
+            { q: "Identify the Thalapathy Vijay movie from this scrambled name: HIREAG", a: "GHAJINI" }
+        ];
+        
+        function loadQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById("question").textContent = questions[currentQuestion].q;
+            } else {
+                document.getElementById("gameArea").classList.add("hidden");
+                document.getElementById("winScreen").classList.remove("hidden");
+            }
+        }
+        
+        function checkAnswer() {
+            let userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+            let correctAnswer = questions[currentQuestion].a.toLowerCase();
+            if (userAnswer === correctAnswer) {
+                currentQuestion++;
+                loadQuestion();
             } else {
                 lives--;
                 document.getElementById("lives").textContent = lives;
-                retryButton.style.display = 'inline-block';
-                alert("❌ Wrong answer! Try again. Lives left: " + lives);
+                alert("❌ Wrong answer! Lives left: " + lives);
                 if (lives === 0) {
                     alert("💀 Game Over! You lost all your lives!");
                     location.reload();
                 }
             }
         }
+        
+        function openFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+        
+        loadQuestion();
     </script>
 </body>
 </html>
