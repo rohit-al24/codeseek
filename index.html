@@ -77,12 +77,6 @@
         <p id="feedback"></p>
     </div>
     
-    <div class="container hidden" id="gameStage">
-        <h2>Crack the Lock! 🔐</h2>
-        <p>Use arrow keys to move the key into the lock.</p>
-        <canvas id="lockCanvas" width="400" height="200" style="background:#262626;"></canvas>
-    </div>
-    
     <div class="container hidden" id="finalGame">
         <h2>Final Challenge: Unscramble the Word 🔤</h2>
         <p>Identify the movie from this scrambled name: HARSIMA</p>
@@ -114,7 +108,7 @@
                 document.getElementById("answer").value = "";
             } else {
                 document.getElementById("gameArea").classList.add("hidden");
-                document.getElementById("gameStage").classList.remove("hidden");
+                document.getElementById("finalGame").classList.remove("hidden");
             }
         }
         
@@ -132,6 +126,16 @@
                     alert("💀 Game Over! You lost all your lives!");
                     location.reload();
                 }
+            }
+        }
+        
+        function checkFinalGame() {
+            let finalAnswer = document.getElementById("finalAnswer").value.trim().toLowerCase();
+            if (finalAnswer === "mersal") {
+                document.getElementById("finalGame").classList.add("hidden");
+                document.getElementById("winScreen").classList.remove("hidden");
+            } else {
+                alert("❌ Wrong answer! Try again.");
             }
         }
         
@@ -153,8 +157,6 @@
                 document.documentElement.requestFullscreen();
             }
         }
-        
-        loadQuestion();
     </script>
 </body>
 </html>
