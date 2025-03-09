@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Club - CodeSeek Adventure</title>
+    <title>Programming Club - CodeThon Adventure</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -57,6 +57,17 @@
         .hidden {
             display: none;
         }
+        .retry-button {
+            background: #ff4444;
+            color: white;
+            display: none;
+        }
+        .branding {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
         .win-image {
             width: 100%;
             max-width: 500px;
@@ -65,9 +76,10 @@
         }
     </style>
 </head>
-<body onload="openFullscreen(); startTimer(45 * 60)">
-    <h1> CodeSeek Adventure - The 45-Min Challenge! 🏆</h1>
-    <p class="timer" id="countdown">45:00</p>
+<body onload="openFullscreen()">
+    <h1> CodeSeek Adventure - The 20-Min Challenge! 🏆</h1>
+    <p class="branding">Powered by Programming Club</p>
+    <p class="timer" id="countdown">20:00</p>
     <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
     
     <div class="container" id="gameArea">
@@ -75,13 +87,6 @@
         <input type="text" id="answer" placeholder="Enter your answer here">
         <button onclick="checkAnswer()">Submit</button>
         <p id="feedback"></p>
-    </div>
-    
-    <div class="container hidden" id="finalGame">
-        <h2>Final Challenge: Unscramble the Word 🔤</h2>
-        <p>Identify the movie from this scrambled name: HARSIMA</p>
-        <input type="text" id="finalAnswer" placeholder="Enter the word">
-        <button onclick="checkFinalGame()">Submit</button>
     </div>
     
     <div class="container hidden" id="winScreen">
@@ -94,21 +99,25 @@
         let lives = 5;
         let currentQuestion = 0;
         const questions = [
-            { q: "What will be the output of print(3 * '3')?", a: "333" },
-            { q: "I hold values, can change anytime, Give me a name, and I’ll be fine! What am I?", a: "variable" },
-            { q: "I am invisible to the computer, but I make the code more readable for you. What am I?", a: "comment" },
-            { q: "What is the output of print(7 // 2)?", a: "3" },
+            { q: "What will be the output of print(7 // 2)?", a: "3" },
+            { q: "What is the output of len(set([1,2,2,3,4,4,5]))?", a: "5" },
+            { q: "What will be the output of print(bool('False'))?", a: "True" },
+            { q: "What is the output of print(3 * '3')?", a: "333" },
+            { q: "What does print(2**3**2) output?", a: "512" },
+            { q: "What will be the output of print('hello'.capitalize())?", a: "Hello" },
+            { q: "What will print('Python'[1:4]) output?", a: "yth" },
             { q: "Which function converts a string into an integer in Python?", a: "int" },
+            { q: "Which Python function is used to get user input?", a: "input" },
             { q: "Identify the movie from this scrambled name: HARSIMA", a: "Mersal" }
         ];
         
         function loadQuestion() {
             if (currentQuestion < questions.length) {
                 document.getElementById("question").textContent = questions[currentQuestion].q;
-                document.getElementById("answer").value = "";
+                document.getElementById("answer").value = ""; // Clear input field
             } else {
                 document.getElementById("gameArea").classList.add("hidden");
-                document.getElementById("finalGame").classList.remove("hidden");
+                document.getElementById("winScreen").classList.remove("hidden");
             }
         }
         
@@ -129,34 +138,19 @@
             }
         }
         
-        function checkFinalGame() {
-            let finalAnswer = document.getElementById("finalAnswer").value.trim().toLowerCase();
-            if (finalAnswer === "mersal") {
-                document.getElementById("finalGame").classList.add("hidden");
-                document.getElementById("winScreen").classList.remove("hidden");
-            } else {
-                alert("❌ Wrong answer! Try again.");
-            }
-        }
-        
-        function startTimer(duration) {
-            let timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = Math.floor(timer / 60);
-                seconds = timer % 60;
-                document.getElementById("countdown").textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-                if (--timer < 0) {
-                    alert("⏳ Time’s up! Game Over!");
-                    location.reload();
-                }
-            }, 1000);
-        }
-        
         function openFullscreen() {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen();
             }
         }
+        
+        loadQuestion();
     </script>
 </body>
 </html>
