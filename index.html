@@ -77,7 +77,7 @@
     </style>
 </head>
 <body onload="openFullscreen()">
-    <h1>🚀 Programming Club Presents: CodeThon Adventure - The 20-Min Challenge! 🏆</h1>
+    <h1> CodeSeek Adventure - The 20-Min Challenge! 🏆</h1>
     <p class="branding">Powered by Programming Club</p>
     <p class="timer" id="countdown">20:00</p>
     <p class="lives">❤️ Lives Left: <span id="lives">5</span></p>
@@ -92,7 +92,7 @@
     <div class="container hidden" id="winScreen">
         <h2>🏆 Congratulations! You Won the CodeThon Adventure! 🎉</h2>
         <p>You have cracked all the puzzles and earned the title of Code Master!</p>
-        <img src="https://github.com/rohit-al24/codeseek/blob/main/53b2732e8a6a8474c335da7fe2a04f33.jpg?raw=true" alt="Thank You" class="win-image">
+        <img src="thankyou-placeholder.jpg" alt="Thank You" class="win-image">
     </div>
     
     <script>
@@ -108,12 +108,13 @@
             { q: "What will print('Python'[1:4]) output?", a: "yth" },
             { q: "Which function converts a string into an integer in Python?", a: "int" },
             { q: "Which Python function is used to get user input?", a: "input" },
-            { q: "Identify the movie from this scrambled name: ESRMLA", a: "Mersal" }
+            { q: "Identify the movie from this scrambled name: HARSIMA", a: "Mersal" }
         ];
         
         function loadQuestion() {
             if (currentQuestion < questions.length) {
                 document.getElementById("question").textContent = questions[currentQuestion].q;
+                document.getElementById("answer").value = ""; // Clear input field
             } else {
                 document.getElementById("gameArea").classList.add("hidden");
                 document.getElementById("winScreen").classList.remove("hidden");
